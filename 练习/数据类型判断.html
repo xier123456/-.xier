@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+     
+        function getType(value) {
+        
+            if (value === null) {
+                return "null"
+            }
+            if (value === undefined) {
+                return "undefined"
+            }
+            if(typeof value !=='object'){
+                return typeof value===BigInt?"bigint":typeof value
+          }else{
+                const tyString=Object.prototype.toString.call(value)
+                switch(tyString){
+                    case '[object Array]':return 'array'
+                    case '[object Date]':return 'date'
+                    case '[object RegExp]':return 'regexp'
+                    case '[object Map]':return 'map'
+                    case '[object Set]':return 'set'
+                    default: return 'object'
+                }
+
+            }
+        }
+   
+
+
+       //ai自动补齐输出，懒了不想打了，规则都一样的
+        console.log(getType(null)); // "null"
+        console.log(getType(undefined)); // "undefined"
+        console.log(getType(123)); // "number"
+        console.log(getType("Hello")); // "string"
+        console.log(getType(true)); // "boolean"
+        console.log(getType([1, 2, 3])); // "array"
+        console.log(getType({ key: "value" })); // "object"
+        console.log(getType(new Date())); // "date"
+        console.log(getType(/abc/)); // "regexp"
+        console.log(getType(new Map())); // "map"
+        console.log(getType(new Set())); // "set"
+        console.log(getType(BigInt(123))); // "bigint"
+        console.log(getType(Symbol("sym"))); // "symbol"
+        console.log(getType(function() {})); // "function"
+        console.log(getType(new Error())); // "error"
+    
+
+        
+    
+    </script>
+
+</body>
+</html>
