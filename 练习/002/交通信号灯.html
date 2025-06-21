@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .light{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .light-list{
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            opacity: 0.3;
+
+        }
+        .light-red{background-color: red;}
+        .light-green{background-color: green;}
+        .light-yellow{background-color: yellow;}
+        .active{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;margin-bottom: 10px;">交通信号灯</h1>
+    <div class="light">
+        <span class="light-list light-red"></span>
+        <span class="light-list light-green"></span>
+        <span class="light-list light-yellow"></span>
+    </div>
+    <p style="text-align: center; " id="lighttime"></p>
+    <span id="span1"></span>
+    <script>
+        const span1 = document.getElementById('span1');
+        const lights = [
+            document.querySelector('.light-red'),
+            document.querySelector('.light-green'),
+            document.querySelector('.light-yellow')
+        ]
+        const lightTime = document.getElementById('lighttime');
+        const durations = [6000, 6000, 1000]; 
+        let currentIndex = 0;
+
+    function switchLight() {
+        // 激活当前灯
+        lights.forEach((light, index) => {
+            if (index === currentIndex) {
+                light.classList.add('active');
+            } else {
+                light.classList.remove('active');
+            }
+        });
+        // 显示倒计时
+        let timeLeft = durations[currentIndex] / 1000;
+        lightTime.textContent = `倒计时：${timeLeft} 秒`;
+        let timer = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                lightTime.textContent = `倒计时：${timeLeft} 秒`;
+            } else {
+                clearInterval(timer);
+            }
+        }, 1000);
+
+        // 切换到下一个灯
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % lights.length;
+            switchLight();
+        }, durations[currentIndex]);
+    }
+
+    switchLight();     
+    </script>
+</body>
+</html>

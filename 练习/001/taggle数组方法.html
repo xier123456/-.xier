@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="添加" id="add">
+
+    <script>
+        const body=document.querySelector('body')
+
+
+        const add=document.getElementById('add')
+        add.addEventListener('click',()=>{
+            body.classList.toggle('active')
+        })
+    </script>
+    
+</body>
+</html>
